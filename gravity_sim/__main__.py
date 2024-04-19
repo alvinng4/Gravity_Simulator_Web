@@ -1,4 +1,5 @@
 import argparse
+import asyncio
 import ctypes
 import math
 from os import environ
@@ -76,7 +77,7 @@ class GravitySimulator:
         self.grav_objs = pygame.sprite.Group()
         self.simulator = Simulator(self)
 
-    def run_prog(self):
+    async def run_prog(self):
         """The main loop for the program"""
         while True:
             self._check_events()
@@ -85,6 +86,7 @@ class GravitySimulator:
             self._check_energy_error()
             self._update_screen()
             self.clock.tick(self.settings.MAX_FPS)
+            await asyncio.sleep(0)
 
     def _check_events(self):
         self.simulator.check_current_integrator()
@@ -252,4 +254,4 @@ class GravitySimulator:
 
 if __name__ == "__main__":
     grav_sim = GravitySimulator()
-    grav_sim.run_prog()
+    asyncio.run(grav_sim.run_prog())
