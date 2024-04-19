@@ -584,7 +584,7 @@ class Grav_obj(Sprite):
         path_earth = os.path.join(main_dir_path, "assets/images/earth.png")
         path_mars = os.path.join(main_dir_path, "assets/images/mars.png")
         path_jupiter = os.path.join(main_dir_path, "assets/images/jupiter.png")
-        path_saturn = os.path.join(main_dir_path, "assets/images/sun.png")
+        path_saturn = os.path.join(main_dir_path, "assets/images/saturn.png")
         path_uranus = os.path.join(main_dir_path, "assets/images/uranus.png")
         path_neptune = os.path.join(main_dir_path, "assets/images/neptune.png")
         # r1 - r3: Positions (AU), v1 - v3: Velocities (AU/d), m: Mass (Solar masses)
