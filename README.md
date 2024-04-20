@@ -1,4 +1,7 @@
 # Gravity Simulator
-This is a Newtonian N-body gravity simulator which projects the results on the xy plane.
+This is an online demo of Newtonian N-body gravity simulator at https://github.com/alvinng4/Gravity-Simulator.
 
-Online demo of interactive module, see https://github.com/alvinng4/Gravity-Simulator
+Online demo: https://alvinng4.github.io/Gravity_Simulator_Web/
+
+The code is very messy since I need to combine every class files into one main.py. 
+See https://github.com/alvinng4/Gravity-Simulator for the original code.
