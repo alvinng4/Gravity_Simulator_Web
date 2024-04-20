@@ -1,3 +1,10 @@
+/*
+ * This is the C library for gravity simulator.
+ * 
+ * To compile this library with Emscripten, use the following command:
+ * emcc -O3 -s WASM=1 -s SIDE_MODULE=1 -o c_lib.wasm c_lib.c
+ */
+
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
