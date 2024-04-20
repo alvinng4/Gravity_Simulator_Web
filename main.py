@@ -1,9 +1,9 @@
 import asyncio
 import ctypes
 import math
-from os import environ
+from pathlib import Path
+import platform
 import sys
-import math 
 import time
 
 import numpy as np 
@@ -29,7 +29,26 @@ class GravitySimulator:
             simulator: stats, settings
         """
         # Use c library to perform simulation
-        self.is_c_lib = False
+        self.is_c_lib = True
+        if self.is_c_lib:
+            try:
+                if platform.system() == "Windows":
+                    self.c_lib = ctypes.cdll.LoadLibrary(
+                        str(Path(__file__).parent / "c_lib.dll")
+                    )
+                elif platform.system() == "Darwin":
+                    self.c_lib = ctypes.cdll.LoadLibrary(
+                        str(Path(__file__).parent / "c_lib.dylib")
+                    )
+                elif platform.system() == "Linux":
+                    self.c_lib = ctypes.cdll.LoadLibrary(
+                        str(Path(__file__).parent / "c_lib.so")
+                    )
+
+                self.c_lib.compute_energy.restype = ctypes.c_double
+            except:
+                print("System message: Loading c_lib failed. Running with numpy.")
+                self.is_c_lib = False
 
         pygame.init()
 
