@@ -30,6 +30,15 @@ class GravitySimulator:
         """
         # Use c library to perform simulation
         self.is_c_lib = True
+        self.c_lib = ctypes.cdll.LoadLibrary(
+                    str(Path(__file__).parent / "c_lib.dll")
+                )
+        self.c_lib = ctypes.cdll.LoadLibrary(
+                        str(Path(__file__).parent / "c_lib.dylib")
+                    )
+        self.c_lib = ctypes.cdll.LoadLibrary(
+                            str(Path(__file__).parent / "c_lib.so")
+                        )
         if self.is_c_lib:
             try:
                 print("System message: Trying to load c_lib.dll.")
