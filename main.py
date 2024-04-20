@@ -32,23 +32,28 @@ class GravitySimulator:
         self.is_c_lib = True
         if self.is_c_lib:
             try:
-                if platform.system() == "Windows":
-                    self.c_lib = ctypes.cdll.LoadLibrary(
-                        str(Path(__file__).parent / "c_lib.dll")
-                    )
-                elif platform.system() == "Darwin":
+                print("System message: Trying to load c_lib.dll.")
+                self.c_lib = ctypes.cdll.LoadLibrary(
+                    str(Path(__file__).parent / "c_lib.dll")
+                )
+            except:
+                print("System message: Loading c_lib.dll failed. Trying to load c_lib.dylib.")
+                try:
                     self.c_lib = ctypes.cdll.LoadLibrary(
                         str(Path(__file__).parent / "c_lib.dylib")
                     )
-                elif platform.system() == "Linux":
-                    self.c_lib = ctypes.cdll.LoadLibrary(
-                        str(Path(__file__).parent / "c_lib.so")
-                    )
+                except:
+                    print("System message: Loading c_lib.dylib failed. Trying to load c_lib.so.")
+                    try:
+                        self.c_lib = ctypes.cdll.LoadLibrary(
+                            str(Path(__file__).parent / "c_lib.so")
+                        )
+                    except:
+                        print("System message: Loading c_lib.so failed. Running with numpy.")
+                        self.is_c_lib = False
 
-                self.c_lib.compute_energy.restype = ctypes.c_double
-            except:
-                print("System message: Loading c_lib failed. Running with numpy.")
-                self.is_c_lib = False
+        if self.is_c_lib:
+            self.c_lib.compute_energy.restype = ctypes.c_double
 
         pygame.init()
 
