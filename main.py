@@ -29,6 +29,7 @@ class GravitySimulator:
             simulator: stats, settings
         """
         # Use c library to perform simulation
+        self.is_c_lib = True
         if self.is_c_lib:
             try:
                 print("System message: Trying to load c_lib.dll.")
