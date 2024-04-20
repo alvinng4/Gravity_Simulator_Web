@@ -29,35 +29,28 @@ class GravitySimulator:
             simulator: stats, settings
         """
         # Use c library to perform simulation
-        self.is_c_lib = True
-        self.c_lib = ctypes.cdll.LoadLibrary(
-                    str(Path(__file__).parent / "c_lib.dll")
-                )
-        self.c_lib = ctypes.cdll.LoadLibrary(
-                        str(Path(__file__).parent / "c_lib.dylib")
-                    )
-        self.c_lib = ctypes.cdll.LoadLibrary(
-                            str(Path(__file__).parent / "c_lib.so")
-                        )
         if self.is_c_lib:
             try:
                 print("System message: Trying to load c_lib.dll.")
                 self.c_lib = ctypes.cdll.LoadLibrary(
                     str(Path(__file__).parent / "c_lib.dll")
                 )
-            except:
+            except Exception as error1:
+                print(error1)
                 print("System message: Loading c_lib.dll failed. Trying to load c_lib.dylib.")
                 try:
                     self.c_lib = ctypes.cdll.LoadLibrary(
                         str(Path(__file__).parent / "c_lib.dylib")
                     )
-                except:
+                except Exception as error2:
+                    print(error2)
                     print("System message: Loading c_lib.dylib failed. Trying to load c_lib.so.")
                     try:
                         self.c_lib = ctypes.cdll.LoadLibrary(
                             str(Path(__file__).parent / "c_lib.so")
                         )
-                    except:
+                    except Exception as error3:
+                        print(error3)
                         print("System message: Loading c_lib.so failed. Running with numpy.")
                         self.is_c_lib = False
 
